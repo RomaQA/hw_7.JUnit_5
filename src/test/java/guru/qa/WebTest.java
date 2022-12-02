@@ -1,23 +1,19 @@
 package guru.qa;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class WebTest {
@@ -26,8 +22,8 @@ public class WebTest {
     void setUp() {
       open("https://www.wildberries.ru");
       $x("(//div[@class='banners-zones'])[1]").shouldBe(visible, Duration.ofSeconds(10));
-  //      Configuration.holdBrowserOpen = false;
-  //      Configuration.browserSize="3920x3080";
+        Configuration.holdBrowserOpen = false;
+        Configuration.browserSize="3920x3080";
     }
 
     @CsvFileSource(resources = "source.csv")
@@ -55,9 +51,6 @@ public class WebTest {
 
     static Stream<Arguments> checkButtons(){
         return Stream.of(
-          //      Arguments.of("Навигация по сайту", List.of("Женщинам", "Обувь", "Детям", "Мужчинам", "Дом", "Новый год", "Красота", "Аксессуары", "Электроника", "Игрушки", "Мебель", "Товары для взрослых", "Продукты", "Бытовая техника", "Зоотовары", "Спорт", "Автотовары", "Книги", "Premium", "Ювелирные изделия", "Для ремонта", "Сад и дача", "Здоровье", "Цифровые товары", "Канцтовары", "Акции", "Сделано в Москве", "Авиабилеты", "Бренды", "Видеообзоры"))
-         //       Arguments.of(List.of("Женщинам "+ "Обувь "+ "Детям "+ "Мужчинам "+ "Дом "+ "Новый год "+ "Красота "+ "Аксессуары "+ "Электроника "+ "Игрушки "+ "Мебель "+ "Товары для взрослых "+ "Продукты "+ "Бытовая техника "+ "Зоотовары "+ "Спорт "+ "Автотовары "+ "Книги "+ "Premium "+ "Ювелирные изделия "+ "Для ремонта "+ "Сад и дача "+ "Здоровье "+ "Цифровые товары"+ "Канцтовары "+ "Акции "+ "Сделано в Москве "+ "Авиабилеты "+ "Бренды "+ "Видеообзоры"))
-         //       Arguments.of(List.of("Женщинам Обувь Детям Мужчинам Дом Новый год Красота Аксессуары Электроника Игрушки Мебель Товары для взрослых Продукты Бытовая техника Зоотовары Спорт Автотовары Книги Premium Ювелирные изделия Для ремонта Сад и дача Здоровье Цифровые товары Канцтовары Акции Сделано в Москве Авиабилеты Бренды Видеообзоры"))
                 Arguments.of("Навигация по сайту", List.of("Женщинам\n" +
                         "Обувь\n" +
                         "Детям\n" +
@@ -99,4 +92,3 @@ public class WebTest {
         $$(".menu-burger__main").filter(visible).shouldHave(CollectionCondition.texts(buttons));
     }
 }
-// Продолжить видео с 39.55 и расставить все оставшиеся теги
